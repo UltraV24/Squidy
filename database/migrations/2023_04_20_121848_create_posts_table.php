@@ -11,17 +11,16 @@ return new class extends Migration
      *
      * @return void
      */
-    //pertemuan4
+    //pertemuan 4
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('posts', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->enum("user_role", ["admin", "customer"]);
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->rememberToken();
+            $table->string("title", 100);
+            $table->text("excerpt");
+            $table->text("content");
+            $table->string("image");
+            $table->foreignId("author_id")->constrained("users");
             $table->timestamps();
         });
     }
@@ -33,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('posts');
     }
 };
